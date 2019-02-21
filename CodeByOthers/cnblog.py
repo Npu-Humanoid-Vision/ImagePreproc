@@ -15,6 +15,7 @@ import numpy as np
 import random
 import threading, os, time
 import logging
+import os
 
 logger = logging.getLogger(__name__)
 ImageFile.LOAD_TRUNCATED_IMAGES = True
@@ -175,9 +176,13 @@ def threadOPS(path, new_path):
                                                        args=(ops_name, image, new_path, img_name,))
                 threadImage[_index].start()
                 _index += 1
-                time.sleep(0.2)
+                time.sleep(0.1)
 
 
 if __name__ == '__main__':
-    threadOPS("../../../BackUpSource/Triangle/Train/Pos/",
-              "../../../BackUpSource/Triangle/Preproced/")
+    os.system("rm ../../../BackUpSource/Ball/Train/Preproc/Neg/*")
+    os.system("rm ../../../BackUpSource/Ball/Train/Preproc/Pos/*")
+    threadOPS("../../../BackUpSource/Ball/Train/Neg/",
+              "../../../BackUpSource/Ball/Train/Preproc/Neg/")
+    threadOPS("../../../BackUpSource/Ball/Train/Pos/",
+              "../../../BackUpSource/Ball/Train/Preproc/Pos/")
