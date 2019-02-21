@@ -13,3 +13,6 @@
 *.xml
 
 *.txt
+
+__pycache__
+*.pyc
