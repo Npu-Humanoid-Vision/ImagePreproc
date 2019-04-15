@@ -42,13 +42,22 @@ int main(int argc, char const *argv[]) {
 
     GetImgNames(raw_data_path+"Pos/", pos_names);
     GetImgNames(raw_data_path+"Neg/", neg_names);
-    
+
     cv::namedWindow("233", CV_WINDOW_NORMAL);
     for (auto i = pos_names.begin(); i != pos_names.end(); i++) {
         cv::Mat t_image = cv::imread(raw_data_path+"Pos/"+*i);
         if (t_image.empty()) {
             continue;
         }
+        // cv::Point2f t[4] = {cv::Point(0, 0), cv::Point(t_image.cols, 0),
+        //                   cv::Point(0, t_image.rows), cv::Point(t_image.cols, t_image.rows)};
+        // cv::Point2f tt[4] = {cv::Point(5, 0), cv::Point(t_image.cols+5, 0),
+        //             cv::Point(5, t_image.rows), cv::Point(t_image.cols+5, t_image.rows)};
+        // cv::Mat trans_ele = cv::getPerspectiveTransform(t, tt);
+        // cv::warpPerspective(t_image, t_image, trans_ele, t_image.size(), 1, BORDER_REPLICATE);
+        // cv::imshow("233", t_image);
+        // cv::waitKey();
+
         for (auto j = 0; j < 3; j++) {
             cv::Mat dst = Rotate(t_image, rotate_angle[j]);
             cv::imshow("233", dst);
@@ -56,7 +65,8 @@ int main(int argc, char const *argv[]) {
             cv::imwrite(GetPath(SAVE_PATH, POS_LABLE), dst);
         }
     }
-    for (auto i = pos_names.begin(); i != pos_names.end(); i++) {
+    for (auto i = neg_names.begin(); i != neg_names.end(); i++) {
+        cout<<raw_data_path+"Neg/"+*i<<endl;
         cv::Mat t_image = cv::imread(raw_data_path+"Neg/"+*i);
         if (t_image.empty()) {
             continue;
@@ -138,7 +148,7 @@ string GetPath(string save_path, int lable) {
         t_ss >> t_s;
         t_s = save_path + t_s;
         t_s += ".jpg";
-        cout<<t_s<<endl;
+        // cout<<t_s<<endl;
     }
     else {
         save_path += "Neg/";
@@ -146,7 +156,7 @@ string GetPath(string save_path, int lable) {
         t_ss >> t_s;
         t_s = save_path + t_s;
         t_s += ".jpg";
-        cout<<t_s<<endl;   
+        // cout<<t_s<<endl;   
     }
     return t_s;
 }

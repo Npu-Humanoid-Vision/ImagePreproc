@@ -11,7 +11,7 @@ def GetImgPaths(folder_path):
 
 
 if __name__ == "__main__":
-    root_path = "../../BackUpSource/BigBall/Raw/"
+    root_path = "../../BackUpSource/BigBall/Rotated/"
     dst_path = "../../BackUpSource/BigBall/"
     data_type = ["Test/", "Train/"]
     sub_paths = ["Pos/", "Neg/"]
